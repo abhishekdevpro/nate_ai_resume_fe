@@ -6,22 +6,22 @@ function Teamdetail(props) {
     {
       img: "https://www.wework.com/ideas/wp-content/uploads/sites/4/2022/08/iStock-1404450332_Nine-characteristics-of-great-teamwork_v1-scaled.jpg",
       title: "Resume Making",
-      desc: 'Dramatically supply transparent deliverable before & you backward comp internal or "organic sources."',
+      desc: 'Get a professionally crafted resume instantly, tailored by industry experts to showcase your strengths and land interviews faster. ',
     },
     {
       img: "https://blogimage.vantagecircle.com/content/images/2023/01/10-Smart-Ways-to-Better-Team-Collaboration-1.png",
       title: "Resume Enhancing",
-      desc: 'Dramatically supply transparent deliverable before & you backward comp internal or "organic sources."',
+      desc: 'Instantly enhance your existing resume with expert-driven improvements, ensuring it’s optimized for ATS and tailored to stand out to employers.',
     },
     {
       img: "https://blogimage.vantagecircle.com/content/images/2020/08/teamwork-and-team-building.png",
       title: "As per ATS & Jobs",
-      desc: 'Dramatically supply transparent deliverable before & you backward comp internal or "organic sources."',
+      desc: 'Get resumes crafted with precision, optimized for ATS and enhanced by AI technology to align with job-specific requirements and boost your chances of success.',
     },
     {
       img: "https://images.spiceworks.com/wp-content/uploads/2022/02/08121058/Team-building-concept-illustration-perfect-for-web-design-banner-mobile-app.jpg",
       title: "Resume Building",
-      desc: 'Dramatically supply transparent deliverable before & you backward comp internal or "organic sources."',
+      desc: 'Receive resumes built by industry experts, designed to highlight your strengths, meet market standards, and position you for success in your field. ',
     },
   ];
   return (

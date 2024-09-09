@@ -66,6 +66,22 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setAdmin, setEmployee, setUser } from "./state/reducer/userNameSlice";
+import Aboutus from "./landingPage/pagesdescriptions/About";
+import Resources from "./landingPage/pagesdescriptions/Resources";
+import Services from "./landingPage/pagesdescriptions/Services";
+import Aboutus1 from "./landingPage/pagesdescriptions/Aboutus";
+import AiCVParsing from "./landingPage/pagesdescriptions/AiCVParsing";
+import AIEnhancedResumeAccuracy from "./landingPage/pagesdescriptions/AIEnhancedResumeAccuracy";
+import AiJobMatchApply from "./landingPage/pagesdescriptions/AiJobMatchApply";
+import AiResumeBuilder from "./landingPage/pagesdescriptions/AiResumeBuilder";
+import AiResumeEnhancer from "./landingPage/pagesdescriptions/AiResumeEnhancer";
+import AiSkillTests from "./landingPage/pagesdescriptions/AiSkillTests";
+import Careers from "./landingPage/pagesdescriptions/Careers";
+import Placement from "./landingPage/pagesdescriptions/Placement ";
+import PrivacyPolicy from "./landingPage/pagesdescriptions/PrivacyPolicy";
+import Salarytools from "./landingPage/pagesdescriptions/Salarytools";
+import SearchJobsApply from "./landingPage/pagesdescriptions/SearchJobsApply";
+import TermsandConditions from "./landingPage/pagesdescriptions/TermsandConditions";
 function App() {
   const userToken = localStorage.getItem("customerAuthToken");
   const adminToken = localStorage.getItem("adminAuthToken");
@@ -130,6 +146,24 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/*" element={<CommonPageNotFound />} />
+        <Route path="aboutus" element={<Aboutus/>}/>
+        <Route path="resources" element={<Resources/>}/>
+        <Route path="services" element={<Services/>}/>
+        <Route path="aboutus1" element={<Aboutus1/>}/>
+        <Route path="aicvparsing" element={<AiCVParsing/>}/>
+         <Route path="AIEnhancedResumeAccuracy" element={<AIEnhancedResumeAccuracy/>}/>
+          <Route path="AiJobMatchApply" element={<AiJobMatchApply/>}/>
+            <Route path="AiResumeBuilder" element={<AiResumeBuilder/>}/>
+              <Route path="AiResumeEnhancer" element={<AiResumeEnhancer/>}/>
+                <Route path="AiSkillTests" element={<AiSkillTests/>}/>
+                  <Route path="Careers" element={<Careers/>}/>
+                  <Route path="Placement" element={<Placement/>}/>
+                  <Route path="PrivacyPolicy" element={<PrivacyPolicy/>}/>
+                  <Route path="Salarytools" element={<Salarytools/>}/>
+                  <Route path="SearchJobsApply" element={<SearchJobsApply/>}/>
+                  <Route path="TermsandConditions" element={<TermsandConditions/>}/>
+
+
         {/* <Route path="/my-orders" element={<MyOrders />} /> */}
         <Route path="/admin">
           <Route path="login" element={<AdminLogin />} />

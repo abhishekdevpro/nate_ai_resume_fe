@@ -5,6 +5,7 @@ import Homelast from './Home/Homelast'
 import Teamdetail from './Home/Teamdetail'
 import Teamseconddetail from './Home/Teamseconddetail'
 import HowItWorks from './Home/Howitworks'
+import Blog from './Home/Blog'
 
 function Home_page() {
   return (
@@ -14,6 +15,7 @@ function Home_page() {
       <Teamdetail/>
       <HowItWorks/>
       <Teamseconddetail/>
+      <Blog/>
       <Homelast/>
       
     </>

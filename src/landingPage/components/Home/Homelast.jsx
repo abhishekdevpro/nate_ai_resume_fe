@@ -4,11 +4,13 @@ import './Home.css'
 function Homelast() {
   return (
     <>
-     <div className=' mb-5' id='bg'>
+     <div className=' mb-' id='bg'>
         <div className=' flex justify-around items-center align-middle'>
             <div className=' text-white items-center align-middle py-20'>
-                <h1 className=' font-semibold text-xl'>Get Start Now CTA</h1>
-                <p className=' text-base font-medium'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, atque.</p>
+                <h1 className=' font-semibold text-xl'>Get Started Now                </h1>
+                <p className=' text-base font-medium'>Get started now and take the first step toward your dream job with a professionally crafted resume tailored to your career goals.
+ <br/>There will be signup button when clicked it takes to signup page
+.</p>
             </div>
             <div className=' flex flex-col '>
                 <form className='flex flex-col gap-4 py-20 ' >

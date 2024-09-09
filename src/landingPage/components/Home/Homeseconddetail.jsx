@@ -62,12 +62,12 @@ const SecondCardSlider = ({ secondcards }) => {
       <Slider {...settings}>
         {secondcards.map((card, index) => (
           <div key={index} className=" py-4">
-            <div className="bg-white rounded-lg flex flex-col shadow-lg  w-[250px] p-6">
+            <div className="bg-white rounded-lg flex flex-col shadow-lg mx-3 p-6">
                 
               
-              <div className=' text-slate-700'>Dramatically supply transparent deliverable before & you backward comp internal or "organic sources."</div>
+              <div className=' text-slate-700'>{card.content}</div>
               <div className=' flex justify-center'>
-                <img src={card.img} alt={card.name} className=" h-14 w-14 text-center  object-cover mb-2 rounded-lg" />
+                <img src={card.img} alt={card.name} className=" h-14 w-14 text-center mt-8 object-cover mb-2 rounded-lg" />
               
                 </div>
               <div className="text-black text-center font-bold text-xl">{card.name}</div>

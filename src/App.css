@@ -18,7 +18,7 @@
 body,
 html {
   height: 100vh;
-  background: linear-gradient(127.21deg, #e3dfd6 -50%, #8d77ab 156.41%);
+  background: linear-gradient(127.21deg, #e3dfd6 -50%, #ffffff 156.41%);
   font-family: "Ubuntu", sans-serif;
 }
 #root {
