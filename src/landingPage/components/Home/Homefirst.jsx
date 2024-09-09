@@ -1,5 +1,6 @@
 import React from 'react'
 import Home_Image from './HomeImage'
+import { Link } from 'react-router-dom'
 
 
 function Home_first() {
@@ -14,7 +15,12 @@ function Home_first() {
                     <div className=' text-lg font-medium text-slate-700'>Maximize your chances of getting noticed by hiring managers with a resume strategically designed to meet ATS criteria and highlight key skills for your target role.
                     </div>
                     <div className=' flex flex-wrap gap-4'>
-                        <button className='  px-6 py-2 text-lg rounded-full font-bold hover:shadow-2xl hover:shadow-slate-500  bg-slate-400' >Get started in 30 seconds</button>
+                      <Link
+                      to={"/user/sign"}
+                      >
+                         <button className='  px-6 py-2 text-lg rounded-full font-bold hover:shadow-2xl hover:shadow-slate-500  bg-slate-400' >Get started in 30 seconds</button>
+                      </Link>
+                       
                         
                     </div>
                     

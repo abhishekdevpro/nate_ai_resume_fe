@@ -1,5 +1,6 @@
 import React from 'react'
 import './Home.css'
+import { Link } from 'react-router-dom'
 
 function Homelast() {
   return (
@@ -20,9 +21,14 @@ function Homelast() {
                     <input type='password'
                     placeholder='Password'
                     className=' px-4 py-2 text-black' id='bg2'/>
-                    <button className='  text-xl px-3 py-2 rounded-lg shadow-lg bg-slate-800 text-white font-semibold '>
+                    <Link
+                    to={"/user/sign"}
+                    >
+                       <button className='  text-xl px-3 py-2 rounded-lg shadow-lg bg-slate-800 text-white font-semibold '>
                         Get Started
                     </button>
+                    </Link>
+                 
                 </form>
             </div>
         </div>

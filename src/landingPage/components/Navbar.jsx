@@ -67,16 +67,16 @@ const Navbar = () => {
                 >
                   Services
                 </Link>
-                <a
-                  href="/blog"
+                <Link
+                  to="http://blog.resumesquad.net"
                   className="text-white px-3 py-2 rounded-md text-lg font-semibold"
                   id="nav"
                   target="_blank"
                 >
                   Blog
-                </a>
+                </Link>
                 <Link
-                  to={"http://resumesquad.ca/blogs"}
+                  to={"/user/login"}
                   className="text-white px-2 py-2 text-lg font-semibold border-2 rounded-xl"
                   id="home_fourth"
                 >

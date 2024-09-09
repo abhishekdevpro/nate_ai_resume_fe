@@ -6,18 +6,22 @@ function Teamdetail(props) {
     {
       img: "https://blog.resumesquad.net/wp-content/uploads/2024/09/White-And-Orange-Modern-Professional-HR-Service-Facebook-Ad-5.png",
       title: "Resume for a Specific Job ",
+      link:'https://blog.resumesquad.net/2024/09/09/resume-for-a-specific-job/'
     },
     {
       img: "https://blog.resumesquad.net/wp-content/uploads/2024/09/White-And-Orange-Modern-Professional-HR-Service-Facebook-Ad-3.png",
       title: "Resume Writing Tips: Expert Guidance",
+      link:'https://blog.resumesquad.net/2024/09/09/resume-writing-tips-expert-guidance/'
     },
     {
       img: "https://blog.resumesquad.net/wp-content/uploads/2024/09/White-And-Orange-Modern-Professional-HR-Service-Facebook-Ad-1.png",
       title: "AI-Driven Resume Scanning",
+      link:'https://blog.resumesquad.net/2024/09/09/ai-driven-resume-scanning/'
     },
     {
       img: "https://blog.resumesquad.net/wp-content/uploads/2024/09/White-And-Orange-Modern-Professional-HR-Service-Facebook-Ad.png",
       title: "Importance of Professional Resume Building Services",
+      link:'https://blog.resumesquad.net/2024/09/09/importance-of-professional-resume-building-services/'
     },
   ];
   return (
