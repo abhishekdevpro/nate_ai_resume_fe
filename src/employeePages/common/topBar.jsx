@@ -16,199 +16,162 @@ import { Link, useNavigate } from "react-router-dom";
 import Logo from "../../assets/logo 1.png";
 import { setEmployeeSidebar } from "../../state/reducer/sidebarSlice";
 const TopBar = () => {
-  const dispatch = useDispatch();
-  const employeeSidebar = useSelector(
-    (state) => state.sidebarSlice.employeeSidebar
-  );
-  const navigate = useNavigate();
-  const [offCanvas, setOffCanvas] = useState(false);
-  const handleLogout = () => {
-    localStorage.removeItem("employeeAuthToken");
-    navigate("/employee/login");
-  };
-  const userName = useSelector((state) => state.userNameSlice.employee);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
   return (
-    <div className="w-full relative text-white bg-customGradient py-[10px] px-[15px] xl:px-[35px]  flex justify-between items-center">
-      <Link to={"/employee"}>
-        <div className="w-[80px] xl:w-[80px] xl:h-[80px]">
-          <img src={Logo} alt="logo" className="w-full h-full object-fill" />
-        </div>
-      </Link>
-      <div className="flex justify-center items-center gap-[35px]">
-        <ul className="hidden sm:flex justify-center items-center gap-[15px] xl:gap-[35px]">
-          <Link to={"/employee"} className="font-bold">
-            HOME
-          </Link>
-          <Link to={"#"} className="font-bold">
-            AI+
-          </Link>
-          <Link to={"#"} className="font-bold">
-            RESOURCES
-          </Link>
-          <Link to={"#"} className="font-bold">
-            ABOUT US
-          </Link>
-          <Link to={"#"} className="font-bold">
-            SERVICES
-          </Link>
-          <Link to={"#"} className="font-bold">
-            BLOGS
-          </Link>
-        </ul>
-        <h3 className="font-bold px-[20px] py-[12px] rounded-[7px] bg-[#8d77ab]">
-          Welcome ! {userName}
-        </h3>
-        {offCanvas ? (
-          <FaX
-            onClick={() => {
-              setOffCanvas(false);
-            }}
-          />
-        ) : (
-          <FaBars
-            onClick={() => {
-              setOffCanvas(true);
-            }}
-            className="cursor-pointer xl:hidden"
-          />
-        )}
-      </div>
-      {offCanvas ? (
-        <div className="w-full sm:w-[40%] top-0 left-0 fixed z-[90]  text-[12px] font-semibold h-screen p-[20px] xl:flex flex-col gap-[12px] bg-[#E3DFD6] text-[#8D77AB]">
-          <div className="w-full flex justify-end">
-            <div className="bg-[#8d77ab] h-[30px] w-[30px] flex items-center justify-center rounded-[30px]">
-              <FaX
-                onClick={() => setOffCanvas(false)}
-                className="text-[#e3dfd6]"
-              />
+    <>
+      <nav className="bg-gray-900 border-b border-gray-200">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex-shrink-0 flex items-center">
+              <a href="/" className="">
+                <img
+                  src="https://nate-dashboard-frontend.vercel.app/static/media/logo%201.dc376ed811cf9ff03040.png"
+                  alt="logo"
+                  className="w-full h-14"
+                />
+              </a>
+            </div>
+            <div className="flex items-center">
+              <div className="hidden sm:ml-6 sm:flex sm:space-x-8" id="nav">
+                <a
+                  href="/"
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                >
+                  Home
+                </a>
+
+                {/* AI+ with dropdown */}
+                <div
+                  className="relative text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                  onMouseLeave={() => setIsDropdownOpen(false)}
+                >
+                  AI+
+                  {isDropdownOpen && (
+                    <div className="absolute -left-60 bg-white text-gray-900 p-2 text-xs shadow-lg mt-2 rounded-md w-64">
+                     At ResumeSquad, we offer AI-powered resume writing services 
+                     designed to enhance job seekers' profiles. Their AI tools help
+                      tailor resumes to specific industries and roles, ensuring alignment
+                       with modern ATS (Applicant Tracking Systems). With expert writers 
+                       and intelligent algorithms, ResumeSquad crafts resumes that highlight
+                        key skills and accomplishments to increase the chances of landing interviews.
+                         Their services cater to professionals across various sectors, providing
+                          personalized and data-driven resume solutions.
+
+                    </div>
+                  )}
+                </div>
+
+                <Link
+                  to={"/resources"}
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                >
+                  Resources
+                </Link>
+                <Link
+                  to={"/services"}
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                  target="_blank"
+                >
+                  Services
+                </Link>
+                <Link
+                  to="http://blog.resumesquad.net"
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                  target="_blank"
+                >
+                  Blog
+                </Link>
+                <Link
+                  to={"/user/login"}
+                  className="text-white px-2 py-2 text-lg font-semibold border-2 rounded-xl"
+                  id="home_fourth"
+                >
+                  Log in
+                </Link>
+                <Link
+                  to={"/user/sign"}
+                  className="text-white px-2 py-2 text-lg font-semibold border-2 rounded-xl"
+                  id="nav"
+                >
+                  Sign up
+                </Link>
+              </div>
+              <div className="flex sm:hidden">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="text-gray-900 hover:text-gray-700 focus:outline-none px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16m-7 6h7"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="w-full flex gap-[5px]">
-            <p className="font-bold text-[14px]">RESUME AI</p>
-          </div>
-          <div className="w-full flex flex-col gap-[12px]">
-            <h3 className="text-[#c1c8cb] font-semibold text-[14px]">MENU</h3>
-
-            <Link
-              onClick={() => dispatch(setEmployeeSidebar("allResumes"))}
-              to={"/employee/all-resumes"}
-            >
-              <button
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  employeeSidebar === "allResumes"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaFile />
-                  All Resumes
-                </div>
-                <FaArrowRight />
-              </button>
-            </Link>
-            <Link
-              onClick={() => dispatch(setEmployeeSidebar("aiEnhanced"))}
-              to={"/employee/ai-enhanced"}
-            >
-              <button
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  employeeSidebar === "aiEnhanced"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaStar />
-                  Ai Enhanced
-                </div>
-                <FaArrowRight />
-              </button>
-            </Link>
-            <Link
-              onClick={() => dispatch(setEmployeeSidebar("allotted"))}
-              to={"/employee/allotted"}
-            >
-              <button
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  employeeSidebar === "allotted"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaRegPaperPlane />
-                  Allotted
-                </div>
-                <FaArrowRight />
-              </button>
-            </Link>
-            <Link
-              onClick={() => dispatch(setEmployeeSidebar("completed"))}
-              to={"/employee/completed"}
-            >
-              <button
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  employeeSidebar === "completed"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaCheck />
-                  Completed
-                </div>
-                <FaArrowRight />
-              </button>
-            </Link>
-            <Link
-              onClick={() => dispatch(setEmployeeSidebar("profile"))}
-              to={"/employee/my-profile"}
-            >
-              <button
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  employeeSidebar === "profile"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaUser />
-                  My Profile
-                </div>
-                <FaArrowRight />
-              </button>
-            </Link>
-
-            {/* <button className="w-full p-[10px] rounded-md text-[#7d848c] justify-between flex gap-[5px] items-center">
-              <div className="flex gap-[12px] items-center">
-                <FaRegMessage />
-                Approved Resumes
+          {isMenuOpen && (
+            <div className="sm:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <a
+                  href="/resume"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Resume
+                </a>
+                <a
+                  href="/cv"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  CV
+                </a>
+                <a
+                  href="/cover-letter"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Cover Letter
+                </a>
+                <a
+                  href="/advice"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Advice
+                </a>
+                <a
+                  href="/login"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Login
+                </a>
+                <a
+                  href="/contact"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Contact Us
+                </a>
               </div>
-            </button> */}
-            {/* <div className="w-full text-[#7d848c] flex flex-col gap-[12px]">
-              <p>OTHERS</p>
-              <button className="w-full p-[10px] rounded-md text-[#7d848c] justify-between flex gap-[5px] items-center">
-                <div className="flex gap-[12px] items-center">
-                  <FaWrench />
-                  resource
-                </div>
-              </button>
-            </div> */}
-            <button
-              onClick={handleLogout}
-              className="w-full p-[10px] rounded-md bg-[#E3DFD6] text-[#8D77AB] justify-between flex gap-[5px] items-center transition-all hover:bg-[#8D77AB] hover:text-[#E3DFD6]"
-            >
-              <div className="flex gap-[12px] items-center">
-                <FaArrowRightFromBracket />
-                Logout
-              </div>
-              <FaArrowRight />
-            </button>
-          </div>
+            </div>
+          )}
         </div>
-      ) : null}
-    </div>
+      </nav>
+    </>
   );
 };
 

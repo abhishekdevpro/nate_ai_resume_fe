@@ -1,115 +1,81 @@
-import React, { useState } from "react";
-import Logo from "../../assets/logo 1.png";
-import { Link } from "react-router-dom";
-import axios from "axios";
-import { showToastSuccess } from "../../utils/toastify/toastify";
-import { ToastContainer } from "react-toastify";
-import validator from "validator";
-const Footer = () => {
-  const [footerValue, setFooterValue] = useState("");
-  const [emailError, setEmailError] = useState("");
+import React from 'react';
+import { FaFacebook } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa6";
+import { Link } from 'react-router-dom';
 
-  const handleChange = (e) => {
-    const email = e.target.value;
-    setFooterValue(email);
-    if (email && !validator.isEmail(email)) {
-      setEmailError("Please enter a valid email address.");
-    } else {
-      setEmailError("");
-    }
-  };
-  const date = new Date().getFullYear();
-  const token = localStorage.getItem("employeeAuthToken");
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (validator.isEmail(footerValue)) {
-      axios({
-        method: "POST",
-        url: "https://api.resumesquad.net/api/user/user-subscribe",
-        headers: {
-          Authorization: token,
-        },
-        data: {
-          email: footerValue,
-        },
-      })
-        .then((res) => {
-          console.log(res);
-          showToastSuccess(res?.data?.message?.toString());
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    } else {
-      setEmailError("Please enter a valid email address.");
-    }
-  };
-  return (
-    <div className="w-full px-[25px] sm:px-[35px] py-[50px] bg-customGradient flex flex-col sm:flex-row  justify-evenly gap-[30px]">
-      <ToastContainer />
-      <div className="w-full xl:w-[30%] flex flex-col gap-[20px]">
-        <div className="w-full flex justify-center items-center gap-[20px]">
-          <div className="w-[100px] h-[100px]">
-            <img src={Logo} alt="logo" className="w-full h-full object-fill" />
-          </div>
-          <div className="w-[70%] flex flex-col gap-[7px]">
-            <input
-              type="text"
-              name="footerValue"
-              id="footerValue"
-              value={footerValue}
-              onChange={handleChange}
-              className="w-full p-[10px] bg-white  rounded-[10px] outline-none text-[14px]"
-            />
-            <button
-              onClick={handleSubmit}
-              className="text-[20px] cursor-pointer tracking-[4px] font-semibold text-white"
-            >
-              SUBSCRIBE NOW
-            </button>
-            {emailError && (
-              <span className="text-red-500 text-[14px] text-center">
-                {emailError}
-              </span>
-            )}
-          </div>
-        </div>
-        <div className="w-full flex flex-col gap-[7px]">
-          <h3 className="text-[24px] font-semibold text-white ">
-            ResumeSquad.Net
-          </h3>
-          <h4 className="text-[18px] font-semibold text-white">
-            Is An AI-Enabled HR Technology Company Based At North Carolina, USA
-          </h4>
-        </div>
-      </div>
-      <div className="w-full xl:w-[50%] flex flex-col justify-between gap-[20px]">
-        <div className="w-full text-white  justify-between font-medium text-[17px] gap-[20px] flex  flex-wrap items-center">
-          <Link to={"#"} className="xl:w-[30%]">
-            --Privacy policy
-          </Link>
-          <Link to={"#"} className="xl:w-[30%]">
-            --Terms of Use
-          </Link>
-          <Link to={"#"} className="xl:w-[30%]">
-            --How It Works
-          </Link>
-          <Link to={"#"} className="xl:w-[30%]">
-            --Data Sharing
-          </Link>
-          <Link to={"#"} className="xl:w-[30%]">
-            --Refunds
-          </Link>
-          <Link to={"#"} className="xl:w-[30%]">
-            --Contact Us
-          </Link>
-        </div>
-        <div className="w-full text-white flex justify-end text-[14px] font-semibold">
-          Copyright {date} ResumeSquad
-        </div>
-      </div>
-    </div>
-  );
-};
+const Footer = () => {
+    return (
+      <>
+      
+        <footer className=" bg-black text-white py-8" id='footerbg'>
+            <div className="container mx-auto flex flex-col gap-7 justify-between px-6">
+              <div className=' flex flex-wrap justify-between px-2 md:px-[65px]'>
+                <div className="flex md:w-auto  md:mb-0">
+                    <img src={"https://nate-dashboard-frontend.vercel.app/static/media/logo%201.dc376ed811cf9ff03040.png"} className=' h-40 w-full'/>
+                    <p className=' text-3xl text-bold flex gap-2 mt-10 px-4'>
+                      <Link to={""}></Link>
+                    <FaFacebook />
+                    <FaLinkedin />
+                    <FaInstagram />
+
+                   </p>
+                </div>
+                <div className="w-full md:w-auto mb-6 md:mb-0">
+                    <h2 className="text-lg font-semibold text-white">Get Our Weekly</h2>
+                    <form className="flex flex-col md:flex-row gap-3">
+                        <input type="email" placeholder="Type your email..." required className="p-2  rounded" />
+                        <button type="submit" className="md:px-4 md:py-1 p-1 rounded-full bg-white text-black hover:bg-orange-500">Subscribe</button>
+                    </form>
+                </div>
+                </div>
+                <br/>
+                <div className=' flex flex-wrap justify-around'>
+                <div className="w-full md:w-auto mb-6 md:mb-0" id='footer'>
+                    <h2 className="text-lg font-bold text-white">Company</h2>
+                    <ul>
+                        <li><a href="/aboutus1" className="">About Us</a></li>
+                        <li><a href="/careers" className="">Careers</a></li>
+                        <li><a href="/Placement" className="">Placement Support</a></li>
+                        <li><a href="/resources" className="">Resources</a></li>
+                    </ul>
+                </div>
+                <div className="w-full md:w-auto mb-6 md:mb-0">
+                    <h2 className="text-lg font-bold text-white">Support</h2>
+                    <ul>
+                      
+                        <li><a href="/Salarytools" className="">Salary Tool</a></li>
+                   
+                        <li><a href="/TermsandConditions" className="">Terms & Conditions</a></li>
+                        <li><a href="/PrivacyPolicy" className="">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div className="w-full md:w-auto mb-6 md:mb-0">
+                    <h2 className="text-lg font-bold text-white">Scope & Products</h2>
+                    <ul>
+                        <li><a href="/AiResumeBuilder" className="">Ai Resume Builder</a></li>
+                        <li><a href="/AiSkillTests" className="">Ai Skill Tests</a></li>
+                        <li><a href="/AiCVParsing" className="">Ai CV Parsing</a></li>
+                      
+                    </ul>
+                </div>
+                <div className="w-full md:w-auto mb-6 md:mb-0">
+                    <h2 className="text-lg font-bold text-white">Ai Resources</h2>
+                    <ul>
+                        <li><a href="/AIEnhancedResumeAccuracy" className="">Ai - Resume Accuracy</a></li>
+                        <li><a href="/AiResumeEnhancer" className="">Ai - Resume Enhancer</a></li>
+                        <li><a href="/AiJobMatchApply" className="">Ai - Job Match & Apply</a></li>
+                
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <div className="container text-base md:mx-auto text-center border-t border-white pt-6 mt-6">
+                <p className="text-white text-right">&copy; Copyright By ResumeSquad.ca All Rights Reserved</p>
+            </div>
+        </footer>
+        </>
+    );
+}
 
 export default Footer;

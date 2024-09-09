@@ -17,303 +17,162 @@ import Logo from "../../assets/logo 1.png";
 import { setAdminSidebar } from "../../state/reducer/sidebarSlice";
 import { motion } from "framer-motion";
 const TopBar = () => {
-  const dispatch = useDispatch();
-  const [offCanvas, setOffCanvas] = useState(false);
-  const [activeTabs, setActiveTabs] = useState("");
-  const handleTabs = (tabs) => {
-    setActiveTabs(tabs === activeTabs ? null : tabs);
-  };
-  useEffect(() => {
-    dispatch(setAdminSidebar(activeTabs));
-  }, [activeTabs]);
-  const adminSidebar = useSelector((state) => state.sidebarSlice.adminSidebar);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const navigate = useNavigate();
-
-  const divVar = {
-    hidden: {
-      opacity: 0,
-      transition: {
-        duration: 0.4,
-      },
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        duration: 0.3,
-      },
-    },
-  };
-  const userName = useSelector((state) => state.userNameSlice.admin);
-  const handleLogout = () => {
-    localStorage.removeItem("adminAuthToken");
-    navigate("/admin/login");
-  };
   return (
-    <div className="w-full relative text-white bg-customGradient py-[10px] px-[15px] xl:px-[35px]  flex justify-between items-center">
-      <Link to={"/admin"}>
-        <div className="w-[80px] xl:w-[80px] xl:h-[80px]">
-          <img src={Logo} alt="logo" className="w-full h-full object-fill" />
-        </div>
-      </Link>
-      <div className="flex justify-center items-center gap-[35px]">
-        <ul className="hidden sm:flex justify-center items-center gap-[15px] xl:gap-[35px]">
-          <Link to={"/admin"} className="font-bold">
-            HOME
-          </Link>
-          <Link to={"#"} className="font-bold">
-            AI+
-          </Link>
-          <Link to={"#"} className="font-bold">
-            RESOURCES
-          </Link>
-          <Link to={"#"} className="font-bold">
-            ABOUT US
-          </Link>
-          <Link to={"#"} className="font-bold">
-            SERVICES
-          </Link>
-          <Link to={"#"} className="font-bold">
-            BLOGS
-          </Link>
-        </ul>
-        <h3 className="font-bold px-[20px] py-[12px] rounded-[7px] bg-[#8d77ab]">
-          Welcome ! {userName}
-        </h3>
-        {offCanvas ? (
-          <FaX
-            onClick={() => {
-              setOffCanvas(false);
-            }}
-          />
-        ) : (
-          <FaBars
-            onClick={() => {
-              setOffCanvas(true);
-            }}
-            className="cursor-pointer xl:hidden"
-          />
-        )}
-      </div>
-      {offCanvas ? (
-        <div className="w-full sm:w-[40%]  fixed top-0 left-0 z-[99] text-[12px] font-semibold h-screen p-[20px] xl:flex flex-col gap-[12px] bg-[#E3DFD6] text-[#8D77AB]">
-          <div className="w-full flex justify-end">
-            <div className="bg-[#8d77ab] h-[30px] w-[30px] flex items-center justify-center rounded-[30px]">
-              <FaX
-                onClick={() => setOffCanvas(false)}
-                className="text-[#e3dfd6]"
-              />
+    <>
+      <nav className="bg-gray-900 border-b border-gray-200">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex-shrink-0 flex items-center">
+              <a href="/" className="">
+                <img
+                  src="https://nate-dashboard-frontend.vercel.app/static/media/logo%201.dc376ed811cf9ff03040.png"
+                  alt="logo"
+                  className="w-full h-14"
+                />
+              </a>
             </div>
-          </div>
-          <div className="w-full flex gap-[5px]">
-            <p className="font-bold text-[14px]">RESUME AI</p>
-          </div>
-          <div className="w-full flex flex-col gap-[12px]">
-            <h3 className="text-[#c1c8cb] font-semibold text-[14px]">MENU</h3>
+            <div className="flex items-center">
+              <div className="hidden sm:ml-6 sm:flex sm:space-x-8" id="nav">
+                <a
+                  href="/"
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                >
+                  Home
+                </a>
 
-            <button
-              onClick={() => {
-                handleTabs("dashboard");
-                navigate("/admin/dashboard");
-              }}
-              className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                adminSidebar === "dashboard"
-                  ? "bg-[#8D77AB] text-[#E3DFD6]"
-                  : "bg-[#E3DFD6] text-[#8D77AB]"
-              } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-            >
-              <div className="flex gap-[12px] items-center ">
-                <FaBars />
-                Dashboard
-              </div>
-              <FaArrowRight />
-            </button>
-            <div className="w-full relative">
-              <button
-                onClick={() => handleTabs("customerInfo")}
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  adminSidebar === "customerInfo"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center ">
-                  <FaChartBar />
-                  Customer Info
-                </div>
-                {adminSidebar === "customerInfo" ? (
-                  <FaArrowDown />
-                ) : (
-                  <FaArrowRight />
-                )}
-              </button>
-              {adminSidebar === "customerInfo" && (
-                <motion.div
-                  variants={divVar}
-                  initial="hidden"
-                  animate="visible"
-                  className="w-full pt-[10px] z-[99] text-[11px] text-left flex flex-col bg-[#E3DFD6] items-start px-[15px] gap-[7px]"
+                {/* AI+ with dropdown */}
+                <div
+                  className="relative text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                  onMouseEnter={() => setIsDropdownOpen(true)}
+                  onMouseLeave={() => setIsDropdownOpen(false)}
                 >
-                  <button onClick={() => navigate("/admin/all-customer")}>
-                    All
-                  </button>
-                  <button onClick={() => navigate("/admin/subscribers")}>
-                    Subscribers
-                  </button>
-                </motion.div>
-              )}
-            </div>
-            <div className="relative w-full">
-              <button
-                onClick={() => handleTabs("resume-list")}
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  adminSidebar === "resume-list"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaCartShopping />
-                  Resume List
-                </div>
-                {adminSidebar === "resume-list" ? (
-                  <FaArrowDown />
-                ) : (
-                  <FaArrowRight />
-                )}
-              </button>
-              {adminSidebar === "resume-list" && (
-                <motion.div
-                  variants={divVar}
-                  initial="hidden"
-                  animate="visible"
-                  className="w-full pt-[10px] z-[99] text-[11px] text-left flex flex-col bg-[#E3DFD6] items-start px-[15px] gap-[7px]"
-                >
-                  <button onClick={() => navigate("/admin/resume-list")}>
-                    All Resumes
-                  </button>
-                  <button
-                    onClick={() => {
-                      navigate("/admin/resume-pending");
-                    }}
-                  >
-                    Uploaded
-                  </button>
-                  <button onClick={() => navigate("/admin/resume-allotted-ai")}>
-                    In Edit
-                  </button>
-                  <button
-                    onClick={() =>
-                      navigate("/admin/resume-allotted-formatting")
-                    }
-                  >
-                    Sent for Approval
-                  </button>
-                  {/* <button
-                  onClick={() => navigate("/admin/resume-allotted-manualedit")}
-                >
-                  Allotted For Manual Edit
-                </button> */}
-                  <button
-                    onClick={() => navigate("/admin/customer-approval-pending")}
-                  >
-                    Approved
-                  </button>
-                  {/* <button onClick={() => navigate("/admin/payment-pending")}>
-                  Payment Pending
-                </button> */}
-                  <button onClick={() => navigate("/admin/rework-needed")}>
-                    Rework Needed
-                  </button>
-                  <button onClick={() => navigate("/admin/completed")}>
-                    Completed
-                  </button>
-                </motion.div>
-              )}
-            </div>
-            <div className="relative w-full">
-              <button
-                onClick={() => handleTabs("employees")}
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  adminSidebar === "employees"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaUserGroup />
-                  Employees
-                </div>
-                {adminSidebar === "employees" ? (
-                  <FaArrowDown />
-                ) : (
-                  <FaArrowRight />
-                )}
-              </button>
-              {adminSidebar === "employees" && (
-                <motion.div
-                  variants={divVar}
-                  initial="hidden"
-                  animate="visible"
-                  className="w-full pt-[10px] z-[99] text-[11px] text-left flex flex-col bg-[#E3DFD6] items-start px-[15px] gap-[7px]"
-                >
-                  <Link to={"/admin/all-employees"}>All Employees</Link>
-                  <button onClick={() => navigate("/admin/employee-creation")}>
-                    Create New
-                  </button>
-                </motion.div>
-              )}
-            </div>
-            <Link
-              onClick={() => {
-                dispatch(setAdminSidebar("payments"));
-              }}
-              to={"/admin/payment"}
-              className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                adminSidebar === "payments"
-                  ? "bg-[#8D77AB] text-[#E3DFD6]"
-                  : "bg-[#E3DFD6] text-[#8D77AB]"
-              } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-            >
-              <div className="flex gap-[12px] items-center">
-                <FaChartColumn />
-                Payments
-              </div>
-              <FaArrowRight />
-            </Link>
-            <Link
-              to={"/admin/profile"}
-              onClick={() => dispatch(setAdminSidebar("my-profile"))}
-            >
-              <button
-                className={`w-full p-[10px] rounded-md   justify-between flex gap-[5px] items-center transition-all ${
-                  adminSidebar === "my-profile"
-                    ? "bg-[#8D77AB] text-[#E3DFD6]"
-                    : "bg-[#E3DFD6] text-[#8D77AB]"
-                } hover:bg-[#8D77AB] hover:text-[#E3DFD6] `}
-              >
-                <div className="flex gap-[12px] items-center">
-                  <FaUser />
-                  My Profile
-                </div>
-                <FaArrowRight />
-              </button>
-            </Link>
+                  AI+
+                  {isDropdownOpen && (
+                    <div className="absolute -left-60 bg-white text-gray-900 p-2 text-xs shadow-lg mt-2 rounded-md w-64">
+                     At ResumeSquad, we offer AI-powered resume writing services 
+                     designed to enhance job seekers' profiles. Their AI tools help
+                      tailor resumes to specific industries and roles, ensuring alignment
+                       with modern ATS (Applicant Tracking Systems). With expert writers 
+                       and intelligent algorithms, ResumeSquad crafts resumes that highlight
+                        key skills and accomplishments to increase the chances of landing interviews.
+                         Their services cater to professionals across various sectors, providing
+                          personalized and data-driven resume solutions.
 
-            <button
-              onClick={handleLogout}
-              className="w-full p-[10px] rounded-md bg-[#E3DFD6] text-[#8D77AB] justify-between flex gap-[5px] items-center transition-all hover:bg-[#8D77AB] hover:text-[#E3DFD6]"
-            >
-              <div className="flex gap-[12px] items-center">
-                <FaArrowRightFromBracket />
-                Logout
+                    </div>
+                  )}
+                </div>
+
+                <Link
+                  to={"/resources"}
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                >
+                  Resources
+                </Link>
+                <Link
+                  to={"/services"}
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                  target="_blank"
+                >
+                  Services
+                </Link>
+                <Link
+                  to="http://blog.resumesquad.net"
+                  className="text-white px-3 py-2 rounded-md text-lg font-semibold"
+                  id="nav"
+                  target="_blank"
+                >
+                  Blog
+                </Link>
+                <Link
+                  to={"/user/login"}
+                  className="text-white px-2 py-2 text-lg font-semibold border-2 rounded-xl"
+                  id="home_fourth"
+                >
+                  Log in
+                </Link>
+                <Link
+                  to={"/user/sign"}
+                  className="text-white px-2 py-2 text-lg font-semibold border-2 rounded-xl"
+                  id="nav"
+                >
+                  Sign up
+                </Link>
               </div>
-              <FaArrowRight />
-            </button>
+              <div className="flex sm:hidden">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="text-gray-900 hover:text-gray-700 focus:outline-none px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M4 6h16M4 12h16m-7 6h7"
+                    ></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
           </div>
+          {isMenuOpen && (
+            <div className="sm:hidden">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <a
+                  href="/resume"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Resume
+                </a>
+                <a
+                  href="/cv"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  CV
+                </a>
+                <a
+                  href="/cover-letter"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Cover Letter
+                </a>
+                <a
+                  href="/advice"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Advice
+                </a>
+                <a
+                  href="/login"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Login
+                </a>
+                <a
+                  href="/contact"
+                  className="text-white block px-3 py-2 rounded-md text-base font-semibold"
+                >
+                  Contact Us
+                </a>
+              </div>
+            </div>
+          )}
         </div>
-      ) : null}
-    </div>
+      </nav>
+    </>
   );
 };
 
